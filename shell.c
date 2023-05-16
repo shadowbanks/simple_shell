@@ -12,6 +12,7 @@ int main(int ac, char **av, char **env)
 {
 	int i = 0, status;
 	char *lineptr = NULL, *pmt = "# ", *argv[] = {"", NULL};
+	char *token;
 	size_t n = 0;
 	ssize_t gline;
 	pid_t cpid;
@@ -33,16 +34,16 @@ int main(int ac, char **av, char **env)
 
 		i = 0;
 
-		token = strtok(buff, " ");
+		token = strtok(lineptr, " ");
 
 		while (token)
 		{
-			args[i] = token;
+			argv[i] = token;
 			token = strtok(NULL, " ");
 			i++;
 		}
-		args[i] = NULL;
-		if (args[0] == NULL)
+		argv[i] = NULL;
+		if (argv[0] == NULL)
 		{
 			continue;
 		}
