@@ -31,6 +31,22 @@ int main(int ac, char **av, char **env)
 			lineptr[gline - 1] = '\0';
 		}
 
+		i = 0;
+
+		token = strtok(buff, " ");
+
+		while (token)
+		{
+			args[i] = token;
+			token = strtok(NULL, " ");
+			i++;
+		}
+		args[i] = NULL;
+		if (args[0] == NULL)
+		{
+			continue;
+		}
+
 		cpid = fork(); /*startt a child process*/
 		if (cpid == -1) /*startt a child process*/
 			perror("Error:");
