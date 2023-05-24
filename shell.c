@@ -1,53 +1,51 @@
-#include "main.h"
+#include "main.c"
 
 /**
  * main - Shell program
  * @ac: argument counter
  * @av: argument variable
- * @env: environment variables
+ * @env: environment variable
  *
  * Return: 0 (on success)
  */
-int main(int ac, char **av, char **env)
+int main(int ac __attribute__((unused)), char **av __attribute__((unused)), char **env)
 {
-	int i = 0, status;
-	char *lineptr = NULL, *pmt = "# ", *argv[] = {"", NULL};
-	size_t n = 0;
-	ssize_t gline;
-	pid_t cpid;
+	int i = 0, status = 0, a = 1, j = 0;
+	char *original_path, *pmt = "# ", status_str[10];
 
-	while (gline != EOF)
+	char *my_env[100];
+
+	while (env[j])
 	{
-		write(1, pmt, 2);
-		gline = getline(&lineptr, &n, stdin);
-
-		if (gline == -1)
-			exit(1);
-		if (gline == 1)/*Check if nothing was typed i.e press only enter key */
-			continue;
-
-		if (lineptr[gline - 1] == '\n')
-		{
-			lineptr[gline - 1] = '\0';
-		}
-
-		cpid = fork(); /*startt a child process*/
-		if (cpid == -1) /*startt a child process*/
-			perror("Error:");
-
-		if (cpid == 0)
-		{
-			argv[0] = lineptr;/*assign the command read by getline*/
-
-			if (execve(argv[0], argv, env) == -1)
-			{
-				perror("Error");
-				exit(1);
-			}
-		}
-		else
-			wait(&status);/*wait for child process to end*/
+		my_env[j] = malloc(_strlen(env[j]) * sizeof(char) + 1);
+		if (my_env[j] == NULL)
+			return (-1);
+		_strcpy(my_env[j], env[j]);
+		j++;
 	}
-	free(lineptr);
-	return (0);
+	my_env[j] = NULL;
+	original_path = _getenv(my_env, "PATH");
+	_setenv(my_env, "OLDPWD", "", 1);
+
+	while (a)
+	{
+		base_conv(status_str, status, 10);
+		_setenv(my_env, "?", status_str, 1);
+		/*Is this fine????*/
+		if (isatty(STDIN_FILENO))
+			write(1, pmt, 2);
+		i = prompt(my_env, original_path, &status);
+		if (i == 1)
+			continue;
+		else if (i == 7)
+			a = 0;
+		else
+			a = 0;
+	}
+
+	j = 0;
+	while (my_env[j])
+		free(my_env[j++]);
+	write(1, "\n", 1);
+	return (status);
 }
