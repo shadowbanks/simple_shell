@@ -13,6 +13,7 @@
 
 extern char **environ;
 
+int _strcmp(const char *s1, const char *s2);
 int _strncmp(const char *, const char *, size_t);
 char *_strtok(char *, const char *);
 char *_strdup(const char *);

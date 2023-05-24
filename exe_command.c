@@ -1,4 +1,4 @@
-#inclde "main.h"
+#include "main.h"
 
 /**
  * exe_command - Start a child process and execute command

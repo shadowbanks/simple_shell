@@ -11,8 +11,8 @@
  */
 int get_token(char **my_env, char *lineptr, char *original_path, int *status)
 {
-	char *token1 = NULL, *tokens[50], *expand[50];
-	int i = 0, j = 0;
+	char *token1 = NULL, *tokens[50];
+	int i = 0;
 
 	token1 = _strtok(lineptr, ";");
 	while (token1)

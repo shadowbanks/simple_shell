@@ -1,4 +1,4 @@
-#include "main"
+#include "main.h"
 
 /**
  * handle_args - handle individual command and it's arguments

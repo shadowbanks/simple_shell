@@ -36,28 +36,29 @@ int handle_cd_dash(char **my_env, char *prev, char *prev_dir, char *dir_temp)
 }
 
 /**
- * handle_cd_dir - handle cd if a directory is passed
- * @my_env: environment variable
- * @prev: temp previous directory
- * @prev_dir: previous directory
- * @dir_temp: an array
+ * _cd_dir - handle cd if a directory is passed
+ * @_env: environment variable
+ * @prv: temp previous directory
+ * @prv_dir: previous directory
+ * @dir_tmp: an array
+ * @dir: directory
  *
  * Return: 9
  */
-int handle_cd_dir(char **my_env, char *prev, char *prev_dir, char *dir_temp)
+int _cd_dir(char **_env, char *prv, char *prv_dir, char *dir_tmp, char *dir)
 {
-	if (getcwd(prev_dir, sizeof(prev_dir)) == NULL)
+	if (getcwd(prv_dir, sizeof(prv_dir)) == NULL)
 		perror("Error");
 	if (chdir(dir) != 0)
 	{
 		perror("Error");
 		return (9);
 	}
-	if (getcwd(dir_temp, sizeof(dir_temp)) == NULL)
+	if (getcwd(dir_tmp, sizeof(dir_tmp)) == NULL)
 		perror("Error");
-	_setenv(my_env, "PWD", dir_temp, 1);
-	_strcpy(prev, prev_dir);
-	_setenv(my_env, "OLDPWD", prev, 1);
+	_setenv(_env, "PWD", dir_tmp, 1);
+	_strcpy(prv, prv_dir);
+	_setenv(_env, "OLDPWD", prv, 1);
 
 	return (9);
 }
@@ -79,5 +80,5 @@ int handle_cd(char **my_env, char **argv)
 	if (_strcmp(dir, "-") == 0)
 		return (handle_cd_dash(my_env, prev, prev_dir, dir_temp));
 	else
-		return (handle_cd_dir(my_env, prev, prev_dir, dir_temp));
+		return (_cd_dir(my_env, prev, prev_dir, dir_temp, dir));
 }
