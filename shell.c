@@ -7,7 +7,7 @@
  * @env: environment variables
  *
  * Return: 0 (on success)
- */
+i */
 int main(int ac, char **av, char **env)
 {
 	int i = 0, status;
@@ -39,6 +39,7 @@ int main(int ac, char **av, char **env)
 		while (token)
 		{
 			argv[i] = token;
+			/*printf("[%d]argv:%s\n", i, argv[i]);*/
 			token = strtok(NULL, " ");
 			i++;
 		}
