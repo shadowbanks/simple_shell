@@ -11,42 +11,42 @@
  */
 int base_conv(char *buffer, long num, int base)
 {
-        char *temp;
-        int digit, sign = 0, len = 0;
+	char *temp;
+	int digit, sign = 0, len = 0;
 
-        if (num == 0)
-        {
-                *buffer++ = 0 + '0';
-                *buffer = '\0';
-                return (_strlen(buffer));
-        }
-        temp = buffer;
+	if (num == 0)
+	{
+		*buffer++ = 0 + '0';
+		*buffer = '\0';
+		return (_strlen(buffer));
+	}
+	temp = buffer;
 
-        if (num < 0)
-        {
-                sign = 1;
-                num = -num;
-        }
-        while (num)
-        {
-                digit = num % base;
-                if (digit > 9)
-                {
-                        *temp++ = digit + 'a' - 10;
-                        len++;
-                }
-                else
-                        *temp++ = digit + '0';
-                num /= base;
-        }
-        if (len == 1)
-                *temp++ = 0 + '0';
+	if (num < 0)
+	{
+		sign = 1;
+		num = -num;
+	}
+	while (num)
+	{
+		digit = num % base;
+		if (digit > 9)
+		{
+			*temp++ = digit + 'a' - 10;
+			len++;
+		}
+		else
+			*temp++ = digit + '0';
+		num /= base;
+	}
+	if (len == 1)
+		*temp++ = 0 + '0';
 
-        if (sign)
-                *temp++ = '-';
-        *temp = '\0';
+	if (sign)
+		*temp++ = '-';
+	*temp = '\0';
 
-        rev_string(buffer);
+	rev_string(buffer);
 
-        return (_strlen(buffer));
+	return (_strlen(buffer));
 }

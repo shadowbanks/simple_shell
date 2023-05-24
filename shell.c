@@ -7,7 +7,7 @@
  * @env: environment variables
  *
  * Return: 0 (on success)
-i */
+ i */
 int main(int ac, char **av, char **env)
 {
 	int i = 0, status;

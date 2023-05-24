@@ -9,16 +9,16 @@
  */
 char *_getenv(char **my_env, const char *name)
 {
-        int k = 0;
+	int k = 0;
 
-        while (my_env[k])
-        {
-                if (_strncmp(my_env[k], name, _strlen(name)) == 0)
-                {
-                        if (my_env[k][_strlen(name)] == '=')
-                                return (my_env[k] + _strlen(name) + 1);
-                }
-                k++;
-        }
-        return (NULL);
+	while (my_env[k])
+	{
+		if (_strncmp(my_env[k], name, _strlen(name)) == 0)
+		{
+			if (my_env[k][_strlen(name)] == '=')
+				return (my_env[k] + _strlen(name) + 1);
+		}
+		k++;
+	}
+	return (NULL);
 }

@@ -9,40 +9,40 @@
  */
 char *searchfile(char **av, char *path)
 {
-        struct stat stbuf;
-        /*char *path = getenv("PATH");*/
-        char *path_dir = NULL, *buff = NULL;
-        int i;
+	struct stat stbuf;
+	/*char *path = getenv("PATH");*/
+	char *path_dir = NULL, *buff = NULL;
+	int i;
 
-        path_dir = strtok(path, ":");
+	path_dir = strtok(path, ":");
 
-        while (path_dir)
-        {
-                i = 0;
-                if (av[i][0] != '/' && av[i][0] != '.')
-                {
-                        buff = malloc(_strlen(path_dir) + _strlen(av[i]) + 2);
-                        if (buff == NULL)
-                                return (NULL);
-                        _strcpy(buff, path_dir);
-                        _strcat(buff, "/");
-                        _strcat(buff, av[i]);
-                }
-                else
-                {
-                        buff = malloc(_strlen(av[i]));
-                        if (buff == NULL)
-                                return (NULL);
-                        _strcpy(buff, av[i]);
-                }
+	while (path_dir)
+	{
+		i = 0;
+		if (av[i][0] != '/' && av[i][0] != '.')
+		{
+			buff = malloc(_strlen(path_dir) + _strlen(av[i]) + 2);
+			if (buff == NULL)
+				return (NULL);
+			_strcpy(buff, path_dir);
+			_strcat(buff, "/");
+			_strcat(buff, av[i]);
+		}
+		else
+		{
+			buff = malloc(_strlen(av[i]));
+			if (buff == NULL)
+				return (NULL);
+			_strcpy(buff, av[i]);
+		}
 
-                if (stat(buff, &stbuf) == 0)
-                {
-                        return (buff);
-                }
+		if (stat(buff, &stbuf) == 0)
+		{
+			return (buff);
+		}
 
-                free(buff);
-                path_dir = strtok(NULL, ":");
-        }
-        return (NULL);
+		free(buff);
+		path_dir = strtok(NULL, ":");
+	}
+	return (NULL);
 }
