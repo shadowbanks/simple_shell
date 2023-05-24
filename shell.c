@@ -7,12 +7,13 @@
  * @env: environment variable
  *
  * Return: 0 (on success)
- */
+ i */
 int main(int ac, char **av, char **env)
 {
 	int i = 0, status = 0, a = 1, j = 0;
 	char *original_path, *pmt = "# ", status_str[10];
 	char *my_env[100];
+
 
 	void(ac);
 	void(av);
