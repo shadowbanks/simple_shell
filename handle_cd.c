@@ -29,7 +29,8 @@ int handle_cd_dash(char **my_env, char *prev, char *prev_dir, char *dir_temp)
 	}
 	else
 	{
-		printf("cd: OLDPWD not set\n");
+		write(2, "cd: OLDPWD not set", 18);
+		write(2, "\n", 1);
 		return (9);
 	}
 	return (9);
@@ -71,7 +72,7 @@ int _cd_dir(char **_env, char *prv, char *prv_dir, char *dir_tmp, char *dir)
  */
 int handle_cd(char **my_env, char **argv)
 {
-	char *dir = NULL, prev[100] = "", prev_dir[100] = "", dir_temp[100] = "";
+	char *dir = NULL, prev[1000] = "", prev_dir[1000] = "", dir_temp[1000] = "";
 
 	if (argv[1])
 		dir = argv[1];
