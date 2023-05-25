@@ -57,8 +57,6 @@ int main(int ac, char **av, char **env)
 	j = 0;
 	while (my_env[j])
 		free(my_env[j++]);
-	/*write(STDOUT_FILENO, "\n", 1);
-	*/
 	return (status);
 }
 
@@ -80,7 +78,6 @@ int non_interactive(char **my_env, char *original_path, int *status)
 	{
 		base_conv(status_str, *status, 10);
 		_setenv(my_env, "?", status_str, 1);
-		printf("%ld\n", read);
 		if (line[read - 1] == '\n')
 			line[read - 1] = '\0';
 		if (get_token(my_env, line, original_path, status) == 99)
