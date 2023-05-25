@@ -13,7 +13,6 @@
 
 extern char **environ;
 
-void handle_err(char **my_env, const char *msg);
 char *_memset(char *s, char b, unsigned int n);
 int _strcmp(const char *s1, const char *s2);
 int _strncmp(const char *, const char *, size_t);
