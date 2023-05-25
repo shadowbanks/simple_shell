@@ -48,6 +48,5 @@ int main(int ac, char **av, char **env)
 	j = 0;
 	while (my_env[j])
 		free(my_env[j++]);
-	write(1, "\n", 1);
 	return (status);
 }

@@ -7,10 +7,12 @@
  *
  * Return: nothing
  */
-void handle_err(char **my_env, const char *msg)
+void handle_err(char **my_env, const char *cmd, const char *msg)
 {
 	char *name = _getenv(my_env, "_");
 	write(2, name, _strlen(name));
+	write(2, ": ", 2);
+	write(2, cmd, _strlen(cmd));
 	write(2, ": ", 2);
 	write(2, msg, _strlen(msg));
 	write(2, "\n", 1);
@@ -42,7 +44,7 @@ int exe_command(char **my_env, char **argv, char *original_path, int *status)
 			argv[0] = command; /*assign the command read by getline*/
 			if (execve(argv[0], argv, my_env) == -1)
 			{
-				handle_err(my_env, "No such file or directory");
+				handle_err(my_env, argv[0], "not found");
 				exit(1);
 			}
 		}
@@ -57,7 +59,7 @@ int exe_command(char **my_env, char **argv, char *original_path, int *status)
 	}
 	else
 	{
-		handle_err(my_env, "No such file or directory");
+		handle_err(my_env, argv[0], "not found");
 		free(path);
 		return (-1);
 	}
