@@ -2,7 +2,8 @@
 
 /**
  * handle_err - Handle error
- * @my_env - environment variable
+ * @my_env: environment variable
+ * @cmd: failed command
  * @msg: error message
  *
  * Return: nothing
@@ -10,6 +11,7 @@
 void handle_err(char **my_env, const char *cmd, const char *msg)
 {
 	char *name = _getenv(my_env, "_");
+
 	write(2, name, _strlen(name));
 	write(2, ": ", 2);
 	write(2, cmd, _strlen(cmd));
