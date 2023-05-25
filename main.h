@@ -9,10 +9,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#define BUFF 10
+#define BUFF 100
 
 extern char **environ;
 
+char *_memset(char *s, char b, unsigned int n);
 int _strcmp(const char *s1, const char *s2);
 int _strncmp(const char *, const char *, size_t);
 char *_strtok(char *, const char *);

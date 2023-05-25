@@ -5,3 +5,4 @@ add_commit_push
 main.c
 *.swp
 a.out
+hsh

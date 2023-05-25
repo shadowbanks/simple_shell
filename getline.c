@@ -12,6 +12,7 @@
 
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
+	static char buffer[BUFF];
 	int fd = fileno(stream);
 	ssize_t rd, red = 0;
 
@@ -32,6 +33,8 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 		if ((*lineptr)[red - 1] == '\n')
 			break;
 	}
+	if (buffer != NULL)
+		buffer[0] = '\0';
 	if (rd < 0)
 	{
 		free(*lineptr);
