@@ -34,7 +34,7 @@ int handle_args(char **my_env, char **_ar, char *org_path, int *stat, int *opt)
 			if (handle_cd(my_env, argv) == 9)
 				break;
 		}
-		exe_command(argv, org_path, stat);
+		exe_command(my_env, argv, org_path, stat);
 		if (*stat == -1)
 			break;
 

@@ -13,6 +13,7 @@
 
 extern char **environ;
 
+void handle_err(char **my_env, const char *msg);
 char *_memset(char *s, char b, unsigned int n);
 int _strcmp(const char *s1, const char *s2);
 int _strncmp(const char *, const char *, size_t);
@@ -28,7 +29,7 @@ int _setenv(char **, const char *, const char *, int);
 int check_env(char **, char *, int, const char *);
 int _unsetenv(char **, const char *);
 char **split_args(char **, char **, int);
-int exe_command(char **, char *, int *);
+int exe_command(char **, char **, char *, int *);
 int handle_args(char **, char **, char *, int *, int *);
 int get_token(char **, char *, char *, int *);
 int handle_and(char **, char **, char *, int *);
