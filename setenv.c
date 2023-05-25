@@ -29,6 +29,7 @@ int _setenv(char **my_env, const char *name, const char *value, int overwrite)
 		new_env[i] = value[j];
 		i++, j++;
 	}
+	new_env[i] = '\0';
 
 	if (check_env(my_env, new_env, overwrite, name) == 1)
 	{

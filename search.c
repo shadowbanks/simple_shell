@@ -12,7 +12,7 @@ char *searchfile(char **av, char *path)
 	struct stat stbuf;
 	/*char *path = getenv("PATH");*/
 	char *path_dir = NULL, *buff = NULL;
-	int i;
+	int i = 0;
 
 	path_dir = strtok(path, ":");
 
@@ -30,7 +30,7 @@ char *searchfile(char **av, char *path)
 		}
 		else
 		{
-			buff = malloc(_strlen(av[i]));
+			buff = malloc(_strlen(av[i]) + 1);
 			if (buff == NULL)
 				return (NULL);
 			_strcpy(buff, av[i]);
@@ -43,6 +43,7 @@ char *searchfile(char **av, char *path)
 
 		free(buff);
 		path_dir = strtok(NULL, ":");
+		i++;
 	}
 	return (NULL);
 }

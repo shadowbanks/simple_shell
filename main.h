@@ -19,7 +19,7 @@ int _strncmp(const char *, const char *, size_t);
 char *_strtok(char *, const char *);
 char *_strdup(const char *);
 int _strcmp(const char *, const char *);
-char *_strcpy(char *, char *);
+char *_strcpy(char *, const char *);
 char *_strcat(char *, char *);
 size_t _strlen(const char *);
 char *searchfile(char **, char *);

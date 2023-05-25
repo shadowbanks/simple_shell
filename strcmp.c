@@ -10,15 +10,17 @@
  */
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t i = 0, s1Len = _strlen(s1), s2Len = _strlen(s2);
+	size_t i = 0;
 
-	while (i < s1Len && i < s2Len && i < n)
+	while (i < n)
 	{
 		if (s1[i] != s2[i])
 			return (s1[i] - s2[i]);
+
+		if (s1[i] == '\0')
+			break;
 		i++;
 	}
 
 	return (0);
 }
-
