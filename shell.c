@@ -37,7 +37,7 @@ int main(int ac, char **av, char **env)
 		{
 			base_conv(status_str, status, 10);
 			_setenv(my_env, "?", status_str, 1);
-			/*Is this fine????*/
+
 			write(1, pmt, 2);
 			i = prompt(my_env, original_path, &status);
 			if (i == 1)
@@ -57,6 +57,8 @@ int main(int ac, char **av, char **env)
 	j = 0;
 	while (my_env[j])
 		free(my_env[j++]);
+	/*write(STDOUT_FILENO, "\n", 1);
+	*/
 	return (status);
 }
 
