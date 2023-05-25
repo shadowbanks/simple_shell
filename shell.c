@@ -48,9 +48,6 @@ int main(int ac, char **av, char **env)
 	j = 0;
 	while (my_env[j])
 		free(my_env[j++]);
-<<<<<<< HEAD
 	//write(STDOUT_FILENO, "\n", 1);
-=======
->>>>>>> 06e4442f3471af85e1c042b9fa859c3d2a5d3399
 	return (status);
 }
