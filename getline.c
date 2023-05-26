@@ -17,20 +17,9 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	size_t red = 0;
 	char ch;
 
-	*lineptr = malloc((sizeof(char) * BUFF));
-	if (*lineptr == NULL)
-		return (-1);
-
 	while ((rd = read(fd, &ch, 1)) > 0)
 	{
-		if (ch == '\n')
-		{
-			(*lineptr)[red++] = ch;
-			break;
-		}
-		(*lineptr)[red++] = ch;
-
-		if (red == *n + 1)
+		if (red == *n)
 		{
 			*n = *n + BUFF;
 			*lineptr = _realloc(*lineptr, *n, (*n + BUFF));
@@ -40,6 +29,14 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 				return (-1);
 			}
 		}
+
+		if (ch == '\n')
+		{
+			(*lineptr)[red++] = ch;
+			break;
+		}
+		(*lineptr)[red++] = ch;
+
 	}
 
 	if (rd < 0)
