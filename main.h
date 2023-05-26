@@ -40,6 +40,8 @@ ssize_t _getline(char **, size_t *, FILE *);
 void _setcwd(char **, char *);
 int base_conv(char *, long, int);
 void rev_string(char *);
+void handle_err(char **my_env, const char *cmd, const char *msg);
+int ret_stat(int *opt, int *stat);
 
 
 #endif /*MAIN_H*/
