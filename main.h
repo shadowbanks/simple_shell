@@ -27,7 +27,7 @@ char *_getenv(char **, const char *);
 int _setenv(char **, const char *, const char *, int);
 int check_env(char **, char *, int, const char *);
 int _unsetenv(char **, const char *);
-char **split_args(char **, char **, int);
+int split_args(char **, char **, int);
 int exe_command(char **, char **, char *, int *);
 int handle_args(char **, char **, char *, int *, int *);
 int get_token(char **, char *, char *, int *);

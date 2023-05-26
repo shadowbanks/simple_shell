@@ -8,7 +8,7 @@
  *
  * Return: pointer to commands and arguments
  */
-char **split_args(char **tokens, char **argv, int k)
+int split_args(char **tokens, char **argv, int k)
 {
 	char *token;
 	int i;
@@ -16,6 +16,8 @@ char **split_args(char **tokens, char **argv, int k)
 	i = 0;
 	token = strtok(tokens[k], " ");
 
+	if (token == NULL)
+		return (32);
 	while (token)
 	{
 		argv[i] = token;
@@ -24,5 +26,5 @@ char **split_args(char **tokens, char **argv, int k)
 	}
 	argv[i] = NULL;
 
-	return (argv);
+	return (0);
 }
