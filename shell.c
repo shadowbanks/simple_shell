@@ -27,9 +27,11 @@ int main(int ac, char **av, char **env)
 		_strcpy(my_env[j], env[j]);
 		j++;
 	}
+
 	my_env[j] = NULL;
 	original_path = _getenv(my_env, "PATH");
 	_setenv(my_env, "OLDPWD", "", 1);
+	_setenv(my_env, "_", av[0], 1);
 
 	if (isatty(STDIN_FILENO))
 	{
@@ -71,8 +73,9 @@ int main(int ac, char **av, char **env)
 int non_interactive(char **my_env, char *original_path, int *status)
 {
 	size_t line_size = 0;
-	char *line = NULL, status_str[10];
+	char *line = NULL, status_str[10], err_no[10];
 	ssize_t read;
+	int line_num = 1;
 
 	while ((read = _getline(&line, &line_size, stdin)) > 0)
 	{
@@ -80,6 +83,10 @@ int non_interactive(char **my_env, char *original_path, int *status)
 		_setenv(my_env, "?", status_str, 1);
 		if (line[read - 1] == '\n')
 			line[read - 1] = '\0';
+
+		base_conv(err_no, line_num++, 10);
+		_setenv(my_env, "line", err_no, 1);
+
 		if (get_token(my_env, line, original_path, status) == 99)
 		{
 			free(line);
