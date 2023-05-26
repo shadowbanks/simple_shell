@@ -74,7 +74,7 @@ int non_interactive(char **my_env, char *original_path, int *status)
 	char *line = NULL, status_str[10];
 	ssize_t read;
 
-	while ((read = getline(&line, &line_size, stdin)) > 0)
+	while ((read = _getline(&line, &line_size, stdin)) > 0)
 	{
 		base_conv(status_str, *status, 10);
 		_setenv(my_env, "?", status_str, 1);
