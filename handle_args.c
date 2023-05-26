@@ -1,5 +1,9 @@
 #include "main.h"
 
+/**
+ * handle_env - handle env command
+ * @my_env: environment variable
+ */
 void handle_env(char **my_env)
 {
 	int i = 0;
@@ -9,6 +13,25 @@ void handle_env(char **my_env)
 		write(1, my_env[i], _strlen(my_env[i]));
 		write(1, "\n", 1);
 		i++;
+	}
+}
+
+/**
+ * handle_exit - handle exit command
+ * @my_env: environment variable
+ * @argv: command and argument
+ * @stat: exit status variable
+ */
+void handle_exit(char **my_env, char **argv, int *stat)
+{
+	if (argv[1])
+	{
+		if (argv[1][0] < '0' || argv[1][0] > '9')
+			handle_err(my_env, argv[0], "Illegal number");
+		else if (argv[1])
+			*stat = atoi(argv[1]);
+		else
+			handle_err(my_env, argv[0], "Illegal number");
 	}
 }
 
@@ -23,18 +46,6 @@ void handle_env(char **my_env)
  * Return: 99 (signify cd), *stat(holds execute return)
  *
  */
-void handle_exit(char **my_env, char **argv, int *stat)
-{
-	if (argv[1])
-	{
-		if (argv[1][0] < '0' || argv[1][0] > '9')
-			handle_err(my_env, argv[0], "Illegal number");
-		else if (argv[1])
-			*stat = atoi(argv[1]);
-		else
-			handle_err(my_env, argv[0], "Illegal number");
-	}
-}
 int handle_args(char **my_env, char **_ar, char *org_path, int *stat, int *opt)
 {
 	char *argv[100] = {"", NULL};
@@ -62,7 +73,7 @@ int handle_args(char **my_env, char **_ar, char *org_path, int *stat, int *opt)
 		if (_strcmp(argv[0], "env") == 0)
 		{
 			handle_env(my_env);
-			return(99);
+			return (99);
 		}
 		exe_command(my_env, argv, org_path, stat);
 		if (*stat == -1)
@@ -78,7 +89,7 @@ int handle_args(char **my_env, char **_ar, char *org_path, int *stat, int *opt)
 /**
  * ret_stat - for && and || to know if to break or continue
  * @opt: option
- * @status: status
+ * @stat: status
  *
  * Return: 1 (to break), 0 (to continue)
  */
