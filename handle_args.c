@@ -14,12 +14,15 @@
 int handle_args(char **my_env, char **_ar, char *org_path, int *stat, int *opt)
 {
 	char *argv[100] = {"", NULL};
-	int k;
+	int k = 0;
 
-	k = 0;
 	while (_ar[k])
 	{
-		split_args(_ar, argv, k);
+		if (split_args(_ar, argv, k) == 32)
+		{
+			*stat = 0;
+			return (99);
+		}
 
 		if (_strcmp(argv[0], "exit") == 0)
 		{
@@ -27,7 +30,6 @@ int handle_args(char **my_env, char **_ar, char *org_path, int *stat, int *opt)
 				*stat = (atoi(argv[1]));
 			return (99);
 		}
-
 
 		if (_strcmp(argv[0], "cd") == 0)
 		{
@@ -37,7 +39,6 @@ int handle_args(char **my_env, char **_ar, char *org_path, int *stat, int *opt)
 		exe_command(my_env, argv, org_path, stat);
 		if (*stat == -1)
 			break;
-
 		if (*opt == 0)
 		{
 			if (*stat != 0)
@@ -48,7 +49,6 @@ int handle_args(char **my_env, char **_ar, char *org_path, int *stat, int *opt)
 			if (*stat == 0)
 				return (*stat);
 		}
-
 		k++;
 	}
 	return (*stat);

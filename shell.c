@@ -83,7 +83,7 @@ int non_interactive(char **my_env, char *original_path, int *status)
 		if (get_token(my_env, line, original_path, status) == 99)
 		{
 			free(line);
-			return (-1);
+			return (*status);
 		}
 	}
 	free(line);
