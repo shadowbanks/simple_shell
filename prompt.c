@@ -44,10 +44,12 @@ int prompt(char **my_env, char *original_path, int *status)
 
 	if (get_token(my_env, lineptr, original_path, status) == 99)
 	{
+		printf("YAY\n");
 		free(lineptr);
 		return (-1);
 	}
 
+	printf("YAY2\n");
 	free(lineptr);
 	return (1);
 }

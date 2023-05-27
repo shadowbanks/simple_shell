@@ -73,7 +73,7 @@ int main(int ac, char **av, char **env)
 int non_interactive(char **my_env, char *original_path, int *status)
 {
 	size_t line_size = 0;
-	char *line = NULL, status_str[10], err_no[10];
+	char *line = NULL, status_str[20], err_no[10];
 	ssize_t read;
 	int line_num = 1;
 
@@ -89,6 +89,8 @@ int non_interactive(char **my_env, char *original_path, int *status)
 
 		if (get_token(my_env, line, original_path, status) == 99)
 		{
+			base_conv(status_str, *status, 10);
+			_setenv(my_env, "?", status_str, 1);
 			free(line);
 			return (*status);
 		}
