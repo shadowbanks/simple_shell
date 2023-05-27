@@ -1,5 +1,35 @@
 #include "main.h"
 
+
+/**
+ * hdl_err_exit - Handle error
+ * @_env: environment variable
+ * @cmd: failed command
+ * @msg: error message
+ * @ar: command arguments
+ *
+ * Return: nothing
+ */
+void hdl_err_exit(char **_env, const char *cmd, const char *msg, char **ar)
+{
+	char *name = _getenv(_env, "_"), *err_no;
+
+	err_no = _getenv(_env, "line");
+
+
+	write(2, name, _strlen(name));
+	write(2, ": ", 2);
+	write(2, err_no, _strlen(err_no));
+	write(2, ": ", 2);
+	write(2, cmd, _strlen(cmd));
+	write(2, ": ", 2);
+	write(2, msg, _strlen(msg));
+	write(2, ": ", 2);
+	write(2, ar[1], _strlen(ar[1]));
+	write(2, "\n", 1);
+	/*printf("Status %s\n", _getenv(*/
+}
+
 /**
  * handle_env - handle env command
  * @my_env: environment variable
@@ -27,12 +57,13 @@ void handle_exit(char **my_env, char **argv, int *stat)
 	if (argv[1])
 	{
 		if (argv[1][0] < '0' || argv[1][0] > '9')
-			handle_err(my_env, argv[0], "Illegal number");
+			hdl_err_exit(my_env, argv[0], "Illegal number", argv);
 		else if (argv[1])
 			*stat = atoi(argv[1]);
 		else
-			handle_err(my_env, argv[0], "Illegal number");
+			hdl_err_exit(my_env, argv[0], "Illegal number", argv);
 	}
+	*stat = 2;
 }
 
 /**
